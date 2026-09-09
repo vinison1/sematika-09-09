@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://ctpp5qtc8ywym"]
+
+[ext_resource type="FontFile" uid="uid://csqsb7u7k5lnt" path="res://Fonte/Letter Magic.ttf" id="1_nk4oc"]
+[ext_resource type="Texture2D" uid="uid://jwrd3kmqm53u" path="res://Recursos/Hud/Titulo/11 Border 01.png" id="2_r0ew4"]
+[ext_resource type="Script" uid="uid://diu51jg224lob" path="res://Scripts/Jogar.gd" id="3_r0ew4"]
+[ext_resource type="Script" uid="uid://qk40xykj7i3j" path="res://cenas/botao_batalha.gd" id="4_bsk81"]
+[ext_resource type="Script" uid="uid://clvifpqnhmya5" path="res://Scripts/Opçoes.gd" id="4_fy470"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fy470"]
+font = ExtResource("1_nk4oc")
+font_size = 100
+font_color = Color(1, 0.8039216, 0.15294118, 1)
+shadow_size = 19
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsk81"]
+atlas = ExtResource("2_r0ew4")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47ht4"]
+atlas = ExtResource("2_r0ew4")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bsk81"]
+font = ExtResource("1_nk4oc")
+font_size = 40
+font_color = Color(1, 0.8039216, 0.15294118, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_us1k3"]
+atlas = ExtResource("2_r0ew4")
+region = Rect2(129.60002, 131.2, 60, 59.199997)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeoe1"]
+atlas = ExtResource("2_r0ew4")
+region = Rect2(129.60002, 128.79999, 60.799988, 62.40001)
+
+[sub_resource type="LabelSettings" id="LabelSettings_d12ky"]
+font = ExtResource("1_nk4oc")
+font_size = 35
+font_color = Color(0.85490197, 0.7882353, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_47ht4"]
+line_spacing = 2.0
+font = ExtResource("1_nk4oc")
+font_size = 40
+font_color = Color(1, 0.8039216, 0.15294118, 1)
+
+[node name="Control" type="Control" unique_id=1727036664]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = -10.0
+offset_right = 11.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="titulo" type="Label" parent="." unique_id=1061266276]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.505
+anchor_top = 0.24200001
+anchor_right = 0.505
+anchor_bottom = 0.24200001
+offset_left = -178.76001
+offset_top = -50.81601
+offset_right = 180.23999
+offset_bottom = 45.18399
+grow_horizontal = 2
+grow_vertical = 2
+text = "Semantika"
+label_settings = SubResource("LabelSettings_fy470")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2014626512]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.0
+offset_top = -86.0
+offset_right = 155.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer" unique_id=868854845]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_bsk81")
+texture_pressed = SubResource("AtlasTexture_47ht4")
+stretch_mode = 1
+script = ExtResource("3_r0ew4")
+
+[node name="Label" type="Label" parent="VBoxContainer/TextureButton" unique_id=1449508216]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 61.0
+text = "Jogar"
+label_settings = SubResource("LabelSettings_bsk81")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton3" type="TextureButton" parent="VBoxContainer" unique_id=1482910527]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_us1k3")
+texture_pressed = SubResource("AtlasTexture_eeoe1")
+stretch_mode = 1
+script = ExtResource("4_bsk81")
+
+[node name="Label" type="Label" parent="VBoxContainer/TextureButton3" unique_id=170924248]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.008
+anchor_bottom = 0.008
+offset_top = 0.027999967
+offset_right = 305.0
+offset_bottom = 63.028
+grow_vertical = 2
+text = "jogar batalha"
+label_settings = SubResource("LabelSettings_d12ky")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="VBoxContainer" unique_id=1768146007]
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_bsk81")
+texture_pressed = SubResource("AtlasTexture_47ht4")
+stretch_mode = 1
+script = ExtResource("4_fy470")
+
+[node name="Label" type="Label" parent="VBoxContainer/TextureButton2" unique_id=138714474]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -2.0
+offset_right = 300.0
+offset_bottom = 61.0
+text = "Opçoes"
+label_settings = SubResource("LabelSettings_47ht4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/TextureButton" to="VBoxContainer/TextureButton" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/TextureButton3" to="VBoxContainer/TextureButton3" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/TextureButton2" to="VBoxContainer/TextureButton2" method="_on_pressed"]

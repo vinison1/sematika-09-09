@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://bnia4p4valewq"]
+
+[ext_resource type="Texture2D" uid="uid://dwm835f6k53xf" path="res://Recursos/Hud/Hud de dialogo/PAPER TEXTURE.png" id="1_jvkfk"]
+[ext_resource type="Script" uid="uid://74f135vskwol" path="res://Scripts/dialog_text.gd" id="1_kd6ev"]
+[ext_resource type="FontFile" uid="uid://csqsb7u7k5lnt" path="res://Fonte/Letter Magic.ttf" id="2_kd6ev"]
+
+[node name="Dialog_text" type="Control" unique_id=1072199300 node_paths=PackedStringArray("_dialog")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kd6ev")
+_dialog = NodePath("TextureRect/RichTextLabel")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=531897114]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33900002
+anchor_top = 0.61700004
+anchor_right = 0.33900002
+anchor_bottom = 0.61700004
+offset_left = 0.47198486
+offset_top = 0.18395996
+offset_right = 505.972
+offset_bottom = 223.18396
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_jvkfk")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect" unique_id=704592084]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 14.0
+offset_right = 490.0
+offset_bottom = 202.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_kd6ev")
+theme_override_font_sizes/normal_font_size = 22
+text = "fugo fago bleh"

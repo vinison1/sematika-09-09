@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bnne8sj1dklko"]
+
+[ext_resource type="Script" uid="uid://ld8sdi80t3nc" path="res://Scripts/dialog.gd" id="1_w71y7"]
+[ext_resource type="Texture2D" uid="uid://dwm835f6k53xf" path="res://Recursos/Hud/Hud de dialogo/PAPER TEXTURE.png" id="2_jnfua"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1m0h"]
+atlas = ExtResource("2_jnfua")
+region = Rect2(10.749084, 0.9342499, 330.30103, 110.10033)
+
+[node name="dialog" type="Control" unique_id=435759482]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w71y7")
+
+[node name="Label" type="Label" parent="." unique_id=12673204]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "pneumoultraviscovasucelular"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="Timer" type="Timer" parent="." unique_id=367294600]
+wait_time = 0.15
+one_shot = true
+
+[node name="Button" type="Button" parent="." unique_id=621376747]
+layout_mode = 0
+offset_left = 198.0
+offset_top = 182.0
+offset_right = 536.0
+offset_bottom = 300.0
+icon = SubResource("AtlasTexture_k1m0h")
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

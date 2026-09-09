@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://rahfuq3w6kmy"]
+
+[ext_resource type="FontFile" uid="uid://csqsb7u7k5lnt" path="res://Fonte/Letter Magic.ttf" id="1_8fua5"]
+[ext_resource type="Texture2D" uid="uid://jwrd3kmqm53u" path="res://Recursos/Hud/Titulo/11 Border 01.png" id="2_4fghb"]
+[ext_resource type="Script" uid="uid://mokaydnegspg" path="res://Scripts/Titulo.gd" id="3_gjl4p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i435a"]
+font = ExtResource("1_8fua5")
+font_size = 51
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m41cm"]
+atlas = ExtResource("2_4fghb")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7eg5w"]
+atlas = ExtResource("2_4fghb")
+region = Rect2(128, 128, 64, 64)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wvfou"]
+font = ExtResource("1_8fua5")
+font_size = 40
+font_color = Color(1, 0.8039216, 0.15294118, 1)
+
+[node name="Control" type="Control" unique_id=217493931]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=266201726]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.12200001
+anchor_right = 0.50100005
+anchor_bottom = 0.12200001
+offset_left = -181.0
+offset_top = -40.056007
+offset_right = 182.84796
+offset_bottom = 39.943993
+grow_horizontal = 2
+text = "Menu Principal"
+label_settings = SubResource("LabelSettings_i435a")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=1636398184]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.5
+offset_top = -33.0
+offset_right = 139.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = SubResource("AtlasTexture_m41cm")
+texture_pressed = SubResource("AtlasTexture_7eg5w")
+stretch_mode = 1
+script = ExtResource("3_gjl4p")
+
+[node name="Label" type="Label" parent="TextureButton" unique_id=1147502383]
+layout_mode = 0
+offset_left = -11.0
+offset_top = -2.0
+offset_right = 289.0
+offset_bottom = 61.0
+text = "Titulo"
+label_settings = SubResource("LabelSettings_wvfou")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="TextureButton" to="TextureButton" method="_on_pressed"]

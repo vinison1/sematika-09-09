@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://bety608vnwdt1"]
+
+[ext_resource type="Script" uid="uid://cs4shtjecu7tf" path="res://cenas/dialogos(txt).gd" id="1_u6tfv"]
+[ext_resource type="Texture2D" uid="uid://b25d5ff4yql0p" path="res://Recursos/Hud/Hud de dialogo/BACKGROUND.png" id="2_u0xy0"]
+[ext_resource type="Texture2D" uid="uid://dusbejbu4aqgp" path="res://Recursos/NPC's/Soldadinho.png" id="3_kefom"]
+[ext_resource type="Texture2D" uid="uid://bckywul6r8yeu" path="res://Recursos/Hud/Hud de dialogo/HUD BACKGROUND.png" id="4_kefom"]
+[ext_resource type="Texture2D" uid="uid://dwm835f6k53xf" path="res://Recursos/Hud/Hud de dialogo/PAPER TEXTURE.png" id="5_df7r3"]
+[ext_resource type="FontFile" uid="uid://csqsb7u7k5lnt" path="res://Fonte/Letter Magic.ttf" id="6_df7r3"]
+[ext_resource type="Script" uid="uid://d30jkmysa0oly" path="res://Scripts/Dialogescolhas.gd" id="7_te8cq"]
+
+[sub_resource type="Animation" id="Animation_te8cq"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jkg6v"]
+_data = {
+&"new_animation": SubResource("Animation_te8cq")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_df7r3"]
+font = ExtResource("6_df7r3")
+font_size = 18
+font_color = Color(0, 0, 0, 0.75686276)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kefom"]
+font = ExtResource("6_df7r3")
+font_size = 22
+font_color = Color(0, 0, 0, 0.8980392)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_te8cq"]
+
+[node name="Control" type="Control" unique_id=148015184 node_paths=PackedStringArray("char_text", "char_name", "char_sprite", "BaseLayer", "ChoicesLayer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u6tfv")
+jsonsrc = "res://Dialogos.json"
+char_text = NodePath("Base/Dialogo/Text")
+char_name = NodePath("Base/Dialogo/Nome")
+char_sprite = NodePath("Base/Character")
+BaseLayer = NodePath("Base")
+ChoicesLayer = NodePath("Escolhas")
+
+[node name="Base" type="CanvasLayer" parent="." unique_id=955130106]
+
+[node name="Background" type="TextureRect" parent="Base" unique_id=760063181]
+offset_right = 1147.0
+offset_bottom = 643.0
+texture = ExtResource("2_u0xy0")
+expand_mode = 1
+
+[node name="Character" type="TextureRect" parent="Base" unique_id=199381229]
+offset_left = 377.0
+offset_top = 42.0
+offset_right = 726.0
+offset_bottom = 363.0
+texture = ExtResource("3_kefom")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Base/Character" unique_id=896414485]
+libraries/ = SubResource("AnimationLibrary_jkg6v")
+
+[node name="TextureRect" type="TextureRect" parent="Base" unique_id=268029775]
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 1154.0
+offset_bottom = 645.0
+texture = ExtResource("4_kefom")
+
+[node name="Dialogo" type="TextureRect" parent="Base" unique_id=874004043]
+offset_left = 313.0
+offset_top = 372.0
+offset_right = 911.0
+offset_bottom = 636.0
+texture = ExtResource("5_df7r3")
+expand_mode = 1
+
+[node name="Nome" type="Label" parent="Base/Dialogo" unique_id=1059518202]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 17.0
+offset_right = 71.0
+offset_bottom = 40.0
+text = "glub"
+label_settings = SubResource("LabelSettings_df7r3")
+
+[node name="Text" type="Label" parent="Base/Dialogo" unique_id=63933897]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 57.0
+offset_right = 577.0
+offset_bottom = 246.0
+text = "uggugugugu"
+label_settings = SubResource("LabelSettings_kefom")
+
+[node name="Escolhas" type="CanvasLayer" parent="." unique_id=1136270098]
+visible = false
+script = ExtResource("7_te8cq")
+b_group = SubResource("ButtonGroup_te8cq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Escolhas" unique_id=1377074802]
+offset_left = 962.0
+offset_top = 352.0
+offset_right = 1152.0
+offset_bottom = 620.0
+alignment = 1
+
+[node name="Button" type="Button" parent="Escolhas/VBoxContainer" unique_id=150579613]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_te8cq")
+text = "A"
+
+[node name="Button2" type="Button" parent="Escolhas/VBoxContainer" unique_id=1218213877]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_te8cq")
+text = "B"
+
+[node name="Button3" type="Button" parent="Escolhas/VBoxContainer" unique_id=526936721]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_te8cq")
+text = "C"
+
+[node name="Button4" type="Button" parent="Escolhas/VBoxContainer" unique_id=1816104240]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_te8cq")
+text = "D"
+
+[connection signal="next_id" from="Escolhas" to="." method="_on_escolhas_next_id"]
