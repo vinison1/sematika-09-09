@@ -1,38 +1,115 @@
 extends Control
 
-@onready var enemy_texture:TextureRect= $"layout principal/area de batalha/lado inimigo/VBoxContainer/TextureRect"
-@onready var enemy_health_bar: ProgressBar=$"layout principal/area de batalha/lado inimigo/VBoxContainer/Vida_Inimigo"
-@onready var player_health_bar:ProgressBar=$"layout principal/area de batalha/lado do jogador/VBoxContainer/Vida_Jogador"
-@onready var text_label:Label=$"layout principal/PanelContainer/Label"
-@onready var run_button: Button = $"layout principal/run_button"
-@onready var ataque: Button = $"layout principal/ataque"
+@onready var jogador:Jogador =$"layout principal/area de batalha/CharacterBody2D"
+@onready var textura_inimigo: TextureRect = %enemy
+@onready var enemy_health_bar: ProgressBar = %Vida_Inimigo
+@onready var player_health_bar: ProgressBar =%Vida_Jogador
+@onready var text_label: Label = %Label
+@onready var ataque: Button = $"layout principal/PanelContainer/HBoxContainer/CenterContainer2/ataque"
+@onready var run_button: Button = $"layout principal/PanelContainer/HBoxContainer/CenterContainer/run_button"
+# Variáveis para guardar as referências de dados
+var current_enemy_health: int = 0
+var enemy_damage: int = 0
 
-var currect_enemy_health: int = 0
-var enemy_damage:int = 0
-var jogador :TextureRect
-
-
-
-func _initialize (inimigo: EnemyData,player_ref:TextureRect):
-	jogador=player_ref
-	currect_enemy_health = inimigo.health
-	enemy_damage = inimigo.damage
+func esconder():
+	ataque.hide()
+	run_button.hide()
+	enemy_health_bar.hide()
+	player_health_bar.hide()
+func monstrar():
+	ataque.show()
+	run_button.show()
+	enemy_health_bar.show()
+	player_health_bar.show()
 	
-	enemy_health_bar.max_value  = inimigo.health
-	enemy_health_bar.value = currect_enemy_health
-	player_health_bar.max_value = jogador.max_health
-	player_health_bar.value = jogador.vida_atual
-	enemy_texture.texture = inimigo.textura
-	text_label.text = "um "+ inimigo.name+" selvagem apareceu"
 
+func _ready() -> void:
+	var inimigo = SignalBus.monstro_selecionado
+	if inimigo != null and jogador != null:
+		esconder()
+		current_enemy_health = inimigo.health
+		enemy_damage = inimigo.damage
+		textura_inimigo.texture = inimigo.textura
+		text_label.text = "um "+inimigo.nome+" selvagem apareceu"
+		await get_tree().create_timer(1.5).timeout
+		monstrar()
+		enemy_health_bar.max_value = inimigo.health
+		enemy_health_bar.value = current_enemy_health
+		player_health_bar.max_value = jogador.vida
+		player_health_bar.value = jogador.vida_atual
+		SignalBus.monstro_selecionado = null
 
 func _on_run_button_pressed() -> void:
-	enemy_texture.hide()
+	textura_inimigo.hide()
 	enemy_health_bar.hide()
 	text_label.text = 'jogador fugiu'
+	ataque.disabled = true
+	run_button.disabled = true
+	await get_tree().create_timer(2.5).timeout
+	get_tree().change_scene_to_file("res://cenas/Titulo.tscn")
 
 
+func _on_ataque_pressed():
+	ataque.disabled = true
+	run_button.disabled = true
+	
+	#dano "falso"
+	var rng = RandomNumberGenerator.new()
+	var dano_ataque = rng.randi_range(3,15)
+	var sorte = rng.randi_range(1,15)
+	const dano_critico = 7 
+	#dano critico se sorte for maior que 7 (8,9,10)
+	if sorte == dano_critico: 
+		var dano = rng.randi_range(10,35)
+		current_enemy_health -= dano
+		enemy_health_bar.value = current_enemy_health
+		text_label.text = 'voce causou '+str(dano)+' de dano critico'
+	else: 
+		current_enemy_health -= dano_ataque
+		enemy_health_bar.value = current_enemy_health
+		text_label.text = 'voce causou '+str(dano_ataque)+' de dano'
+	
+	#pausa de 1 segundo
+	await get_tree().create_timer(1.0).timeout
+	
+	#função de vitoria ou turno do inimigo
+	if current_enemy_health <= 0:
+		vitoria()
+	else:
+		turno_inimigo()
 
+func turno_inimigo():
+	var rng = RandomNumberGenerator.new()
+	text_label.text='o inimigo atacou'
+	await get_tree().create_timer(1.0).timeout
+	var esquiva = rng.randi_range(8,11)
+	var esquivou = 8
+	if esquiva > esquivou:
+		text_label.text = "voce esquivou do ataque inimigo"
+	else: 
+		jogador.vida_atual -= enemy_damage
+		player_health_bar.value = jogador.vida_atual
+		text_label.text = 'voce recebeu '+str(enemy_damage)+' de dano'
+	
+	await get_tree().create_timer(1.0).timeout
+	
+	#checar se o jogador morreu
+	if jogador.vida_atual <= 0 :
+		text_label.text = 'voce foi derrotado...'
+		await get_tree().create_timer(2.5).timeout
+		jogador.hide()
+		player_health_bar.hide()
+		# colocar alguma tela de morte
+		#get_tree()
+	else:
+		ataque.disabled = false
+		run_button.disabled = false
+		text_label.text = 'agora e a sua vez'
 
-func _on_ataque_pressed() -> void:
-	text_label.text = 'jogador atacou'
+func vitoria():
+	text_label.text = 'voce venceu'
+	await get_tree().create_timer(1.5).timeout
+	textura_inimigo.hide()
+	enemy_health_bar.hide()
+	await get_tree().create_timer(1.5).timeout
+	get_tree().change_scene_to_file("res://cenas/Titulo.tscn")
