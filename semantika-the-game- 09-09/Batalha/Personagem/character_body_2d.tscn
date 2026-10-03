@@ -1,12 +1,17 @@
 [gd_scene format=3 uid="uid://bm4b3es75uxqq"]
 
+[ext_resource type="Script" uid="uid://fwshlfqp50m4" path="res://Batalha/codigos/jogador.gd" id="1_tns5u"]
+[ext_resource type="Texture2D" uid="uid://dusbejbu4aqgp" path="res://Recursos/NPC's/Soldadinho.png" id="2_bara8"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gdqvo"]
 radius = 41.0
 height = 120.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=394085930]
+script = ExtResource("1_tns5u")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=465058328]
+texture = ExtResource("2_bara8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1543904427]
 shape = SubResource("CapsuleShape2D_gdqvo")
